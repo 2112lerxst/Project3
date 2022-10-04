@@ -5,16 +5,12 @@
 
 
         //It doesn't work and I don't know how to fix it.
-        //Take user input to look for file
-        //Write line
-        //Create new jagged array
-        //Look for file with streamreader(?)
         static void Main(string[] args)
         {
-            string uInput = methodman.Read("Enter file: ");
-            Console.WriteLine(uInput);
-            int[][] jaggedArray = new int[20][];
-            StreamReader sr = new StreamReader(Path.GetFullPath("inputJagged.csv"));
+            string uInput = methodman.Read("Enter file: ");//Take user input to look for file
+            Console.WriteLine(uInput);//Write line to take user input
+            int[][] jaggedArray = new int[20][];//Create new jagged array
+            StreamReader sr = new StreamReader(Path.GetFullPath("inputJagged.csv")); //Look for file with streamreader(?)
 
 
         }
@@ -89,5 +85,48 @@
             }
         }
 
+        //Merge sort result has to be printed
+        //Runs through method in methodman
+        static void printMerge(int[][] jaggedArray)
+        {
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                methodman.printArra(jaggedArray[i]);
+
+            }
+        }
+
+
+        //https://www.tutorialspoint.com/Binary-search-in-Chash Used this as format for binary, replaced with min and max with left and right values
+        //https://www.c-sharpcorner.com/blogs/binary-search-implementation-using-c-sharp1 also this
+        //Binary search works by taking left boundary and comparing to right
+        //If left is not greater than right, start in middle, then searches the right boundary
+        //Array is what the user wants to search, key is the value looking for 
+        //
+        public static object BinarySearch(int[] arr, int key)
+        {
+            int index = arr[key]; //Binary has to return an index value, or a -1 if value is missing from array
+            int left = 0; //Start at left value
+            int right = arr.Length - 1;
+
+            while (left <= right) //While left less than right
+            {
+                int mid = (left + right) / 2; //Go to middle and split array
+                if (key == arr[mid]) //If key found in middle, return key
+                {
+                    return ++mid;
+                }
+                else if (key < arr[mid]) //If key not found in middle
+                {
+                    right = mid - 1; //Search right again
+                }
+                else //If key not found 
+                {
+                    left = mid + 1; //Search left side
+                }
+            }
+            return index;
+        }
+        //Binary result has to be printed
 
     } }
